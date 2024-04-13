@@ -66,11 +66,11 @@ void partationOfText(string& text, char grid[row][col]){
     for(int i = 0; i < text.size(); i++){
         newtext += text[i];
         if(i < text.size() - 1 && text[i] == text[i+1]){
-            newtext += 'x';
+            newtext += 'x';  // add x in the middle of the same character
         }
     }
-    if(newtext.size() % 2 != 0){
-        newtext += 'x';
+    if(newtext.size() % 2 != 0){  // add z in the end if the length of text is even
+        newtext += 'z';
     }
 
     text = newtext;
