@@ -93,6 +93,9 @@ pair<char, char> compute(char first, char second, char grid[row][col]){
     pair<char, char> positions;
     int a = -1, b = -1, c = -1, d = -1;
     
+    if(first == 'j') first = 'i';  // since i/j are written in same index in playfair cipher
+    if(second == 'j') second = 'i';
+    
     for(int i = 0; i < row; i++){
         for(int j = 0; j < col; j++){
             if(grid[i][j] == first){
