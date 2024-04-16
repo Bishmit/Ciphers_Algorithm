@@ -2,6 +2,13 @@
 #include<math.h>
 using namespace std;
 
+void computeDeterminant(int mat[3][3], double & determinant){
+    determinant = (mat[0][0] * ((mat[1][1] * mat[2][2]) - (mat[1][2] * mat[2][1]))) -
+                  (mat[0][1] * ((mat[1][0] * mat[2][2]) - (mat[1][2] * mat[2][0]))) +
+                  (mat[0][2] * ((mat[1][0] * mat[2][1]) - (mat[1][1] * mat[2][0])));
+    cout << "Determinant: " << determinant << endl;
+}
+
 void transposeMatrix(int mat[3][3], int transpose[3][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -10,29 +17,23 @@ void transposeMatrix(int mat[3][3], int transpose[3][3]) {
     }
 }
 
-void performOperation(int transpose[3][3], int newmat[3][3], int adj[3][3], int& determinant) {
+void performOperation(int transpose[3][3], int newmat[3][3], int adj[3][3]) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             newmat[i][j] = (transpose[(i + 1) % 3][(j + 1) % 3] * transpose[(i + 2) % 3][(j + 2) % 3])
-                - (transpose[(i + 1) % 3][(j + 2) % 3] * transpose[(i + 2) % 3][(j + 1) % 3]);
+                           - (transpose[(i + 1) % 3][(j + 2) % 3] * transpose[(i + 2) % 3][(j + 1) % 3]);
 
             if ((i + j) % 2 != 0) {
                 newmat[i][j] = (-1) * newmat[i][j];
             }
-            cout << newmat[i][j] << " ";
+           // cout << newmat[i][j] << " ";
         }
-        cout << endl;
+       // cout << endl;
     }
-    cout << endl;
-
-    // Compute determinant
-    determinant = (newmat[0][0] * ((newmat[1][1] * newmat[2][2]) - (newmat[1][2] * newmat[2][1]))) -
-        (newmat[0][1] * ((newmat[1][0] * newmat[2][2]) - (newmat[1][2] * newmat[2][0]))) +
-        (newmat[0][2] * ((newmat[1][0] * newmat[2][1]) - (newmat[1][1] * newmat[2][0])));
-
-    cout << "Determinant: " << determinant << endl;
+   // cout << endl;
 
     // Finding adjoint now 
+    cout<<"The adjoint is: "<<endl; 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             adj[i][j] = newmat[i][j];
@@ -43,7 +44,7 @@ void performOperation(int transpose[3][3], int newmat[3][3], int adj[3][3], int&
     }
 }
 
-void findinverse(int adj[3][3], int determinant, int inversemat[3][3]) {
+void findinverse(int adj[3][3], double determinant, double inversemat[3][3]) {
     cout << endl << "Inverse matrix:" << endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -54,20 +55,22 @@ void findinverse(int adj[3][3], int determinant, int inversemat[3][3]) {
     }
 }
 
-
 int main() {
     int mat[3][3];
-    int transpose[3][3], newmat[3][3], adj[3][3], inversemat[3][3];
-    int determinant;
+    int transpose[3][3], newmat[3][3], adj[3][3];
+    double determinant;
+    double inversemat[3][3];
+    
     cout << "Enter the elements of the matrix:" << endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             cin >> mat[i][j];
         }
     }
-
+    
+    computeDeterminant(mat, determinant); 
     transposeMatrix(mat, transpose);
-    performOperation(transpose, newmat, adj, determinant);
+    performOperation(transpose, newmat, adj);
     findinverse(adj, determinant, inversemat);
 
     return 0;
