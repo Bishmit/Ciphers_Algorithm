@@ -109,10 +109,15 @@ Triplet doEncryption(char first, char second, char third, int mat[ROW][COL]) {
     } else {
         cout << "Not a letter!";
     }
-    
-    int newX = result.x * mat[0][0] + result.y * mat[0][1] + result.z * mat[0][2];
-    int newY = result.x * mat[1][0] + result.y * mat[1][1] + result.z * mat[1][2];
-    int newZ = result.x * mat[2][0] + result.y * mat[2][1] + result.z * mat[2][2];
+
+     int newX = result.x * mat[0][0] + result.y * mat[1][0] + result.z * mat[2][0];
+    int newY = result.x * mat[0][1] + result.y * mat[1][1] + result.z * mat[2][1];
+    int newZ = result.x * mat[0][2] + result.y * mat[1][2] + result.z * mat[2][2];
+
+    // somewhere this type of matrix multiplication is also done
+    // int newX = result.x * mat[0][0] + result.y * mat[0][1] + result.z * mat[0][2];
+    // int newY = result.x * mat[1][0] + result.y * mat[1][1] + result.z * mat[1][2];
+    // int newZ = result.x * mat[2][0] + result.y * mat[2][1] + result.z * mat[2][2];
     
     result.x = (newX) % 26;
     result.y = (newY) % 26;
@@ -265,9 +270,14 @@ Triplet doDecryption(char first, char second, char third, int inversemat[ROW][CO
     }
 
     // Perform matrix multiplication for decryption
-    int decryptedX = (result.x * inversemat[0][0] + result.y * inversemat[0][1] + result.z * inversemat[0][2]) % 26;
-    int decryptedY = (result.x * inversemat[1][0] + result.y * inversemat[1][1] + result.z * inversemat[1][2]) % 26;
-    int decryptedZ = (result.x * inversemat[2][0] + result.y * inversemat[2][1] + result.z * inversemat[2][2]) % 26;
+    int decryptedX = (result.x * inversemat[0][0] + result.y * inversemat[1][0] + result.z * inversemat[2][0]) % 26;
+    int decryptedY = (result.x * inversemat[0][1] + result.y * inversemat[1][1] + result.z * inversemat[2][1]) % 26;
+    int decryptedZ = (result.x * inversemat[0][2] + result.y * inversemat[1][2] + result.z * inversemat[2][2]) % 26;
+
+    // somewhere this type of matrix multiplication is done 
+    // int decryptedX = (result.x * inversemat[0][0] + result.y * inversemat[0][1] + result.z * inversemat[0][2]) % 26;
+    // int decryptedY = (result.x * inversemat[1][0] + result.y * inversemat[1][1] + result.z * inversemat[1][2]) % 26;
+    // int decryptedZ = (result.x * inversemat[2][0] + result.y * inversemat[2][1] + result.z * inversemat[2][2]) % 26;
 
     // Ensure decrypted values are positive
     decryptedX = (decryptedX + 26) % 26;
