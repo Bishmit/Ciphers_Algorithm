@@ -131,6 +131,10 @@ void computeDeterminant(int mat[ROW][COL], int &determinant) {
     determinant = (mat[0][0] * ((mat[1][1] * mat[2][2]) - (mat[1][2] * mat[2][1]))) -
                   (mat[0][1] * ((mat[1][0] * mat[2][2]) - (mat[1][2] * mat[2][0]))) +
                   (mat[0][2] * ((mat[1][0] * mat[2][1]) - (mat[1][1] * mat[2][0])));
+    
+    int newDeterminant = determinant % 26; 
+    if(newDeterminant < 0 ) newDeterminant += 26; 
+    determinant = newDeterminant; 
     cout << "Determinant: " << determinant << endl;
 }
 
