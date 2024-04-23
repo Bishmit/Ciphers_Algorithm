@@ -114,7 +114,7 @@ int main() {
     cout << "2. Decryption" << endl;
     cout << "Choose mode: ";
     cin>>mode; 
-    cin>>ignore(); 
+    cin.ignore(); 
     
         switch(mode) {
             case 1: 
@@ -122,7 +122,7 @@ int main() {
                 getline(cin, text);  
                 cout << "Enter the depth: "; 
                 cin >> depth; 
-                encryptRailFence(plaintext, depth);
+                encryptRailFence(text, depth);
                 break;
 
             case 2: 
